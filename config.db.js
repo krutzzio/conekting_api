@@ -16,4 +16,6 @@ try {
     console.log("Error al conectar con la base de datos")
 }
 
+//Ejecutar API: nodemon start (recordar instalar nodemon globalmente)
+
 module.exports = {connection}
