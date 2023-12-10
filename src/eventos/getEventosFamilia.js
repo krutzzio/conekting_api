@@ -6,7 +6,7 @@ const call = `SELECT * FROM familias
         INNER JOIN usuarios ON eventosusuarios.idusuario = usuarios.idusuario
         WHERE eventosusuarios.organizadorEvento IS NOT NULL;`
 
-const getUsuarios = (request, response) => {
+const getEventosFamilia = (request, response) => {
     connection.query(call, (error, results) => {
         error
             ? response.status(500).json({ "error": error })
@@ -14,4 +14,4 @@ const getUsuarios = (request, response) => {
     })
 }
 
-module.exports = getUsuarios;
+module.exports = getEventosFamilia;
