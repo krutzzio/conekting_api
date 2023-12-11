@@ -2,7 +2,7 @@ const express = require("express")
 const app = express();
 
 const getUsuarios = require('../src/usuarios/getUsuarios')
-const postUsuarios = require('../src/usuarios/postUsuarios')
+const postUsuarios = require ('../src/usuarios/postUsuarios')
 /*const login = require('../src/usuarios/login')
 const logout = require('../src/usuarios/logout')*/
 
