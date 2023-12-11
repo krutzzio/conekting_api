@@ -1,12 +1,11 @@
 const { connection } = require("../../config.db");
 
-const call = `SELECT * FROM usuarios
+const call = `SELECT usuarios.nombreUsuario, usuarios.idusuario FROM usuarios
         INNER JOIN eventosusuarios ON usuarios.idusuario  = eventosusuarios.idusuario
         INNER JOIN eventos ON eventosusuarios.idevento = eventos.idevento
-        INNER JOIN familias ON eventos.idfamilia = familias.idfamilia
-        WHERE eventosusuarios.organizadorEvento = 1 AND  eventos.idevento = ?;`
+        WHERE eventos.idevento = ?; `
 
-const getEvento = (request, response) => {
+const getMiembrosEvento = (request, response) => {
 
     const id = request.params.id;
 
@@ -17,4 +16,4 @@ const getEvento = (request, response) => {
     })
 }
 
-module.exports = getEvento;
+module.exports = getMiembrosEvento;
