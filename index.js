@@ -8,6 +8,7 @@ app.use(express.urlencoded({ extended: true }))
 
 app.use(require("./routes/usuarios"))
 app.use(require("./routes/eventos"))
+app.use(require("./routes/familias"))
 
 app.listen(process.env.PORT || 3300, () => {
     console.log("Servidor corriendo en el puerto 3300");
