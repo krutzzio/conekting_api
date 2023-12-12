@@ -13,11 +13,7 @@ const postUsuarios = (request, response) => {
             response.status(500).json({"error": error})
             :
             response.status(201).json({"Registro Completo!":
-<<<<<<< HEAD
-            results.affectedRows});  
-=======
             results.affectedRows});   
->>>>>>> 1836ef1516b3b12ddce972cbc3efd3a00614604a
         }
     )}
     module.exports = postUsuarios;
