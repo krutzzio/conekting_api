@@ -1,19 +1,36 @@
-const {connection} = require("../../config.db");
+const { connection } = require("../../config.db");
 
-    const call = `INSERT INTO familias (nombreFamilia, descripcionFamilia)  
-VALUES (?,?)`
+const call1 = `INSERT INTO familias (nombreFamilia, descripcionFamilia)  
+        VALUES (?,?)`
+
+const call2 = `INSERT INTO familiasusuarios (idusuario, idfamilia, organizadorFamilia)  
+        VALUES (?,?,?)`
 
 const postFamilias = (request, response) => {
-    const {nombreFamilia, descripcionFamilia} = request.body;
-    
-    connection.query(call,[nombreFamilia,descripcionFamilia],
+    const { nombreFamilia, descripcionFamilia, idusuario } = request.body;
+
+    connection.query(call1, [nombreFamilia, descripcionFamilia],
         (error, results) => {
+
+            const idfamilia = results.insertId
+            console.log(results, idusuario)
+
             error
-            ?
-            response.status(500).json({"error": error})
-            :
-            response.status(201).json({"Familia creada correctamente!":
-            results.affectedRows});   
+                ? response.status(500).json({ "error": error })
+                : connection.query(call2, [idusuario, idfamilia, 1],
+                    (error, results) => {
+                        error
+                            ?
+                            response.status(500).json({ "error": error })
+                            :
+                            response.status(201).json({
+                                "Familia creada correctamente!":
+                                    results.affectedRows
+                            });
+                    }
+                )
         }
-    )}
-    module.exports = postFamilias;
+    )
+}
+
+module.exports = postFamilias;
