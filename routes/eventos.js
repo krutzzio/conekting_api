@@ -8,6 +8,7 @@ const getEventosFamilia = require('../src/eventos/getEventosFamilia')
 const getEventosUsuario = require('../src/eventos/getEventosUsuario')
 
 const postEvento = require('../src/eventos/postEvento')
+const postUnirteEvento = require('../src/eventos/postUnirteEvento')
 
 
 app.route("/api/eventos").get(getEventos);
@@ -17,6 +18,7 @@ app.route("/api/eventosfamilia/:id").get(getEventosFamilia);
 app.route("/api/eventosusuario/:id").get(getEventosUsuario);
 
 app.route("/api/eventos").post(postEvento);
+app.route("/api/unirteevento").post(postUnirteEvento);
 
 
 module.exports = app

@@ -4,7 +4,8 @@ const call = `SELECT * FROM familias
         INNER JOIN eventos ON familias.idfamilia = eventos.idfamilia
         INNER JOIN eventosusuarios ON eventos.idevento = eventosusuarios.idevento
         INNER JOIN usuarios ON eventosusuarios.idusuario = usuarios.idusuario
-        WHERE eventosusuarios.organizadorEvento = 1;`
+        WHERE eventosusuarios.organizadorEvento = 1
+        ORDER BY eventos.fechaEvento;`
         
 const getEventos = (request, response) => {
     connection.query(call, (error, results) => {
