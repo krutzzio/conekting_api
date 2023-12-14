@@ -13,17 +13,14 @@ const postFamilias = (request, response) => {
         (error, results) => {
 
             const idfamilia = results.insertId
-            console.log(results, idusuario)
 
             error
                 ? response.status(500).json({ "error": error })
                 : connection.query(call2, [idusuario, idfamilia, 1],
                     (error, results) => {
                         error
-                            ?
-                            response.status(500).json({ "error": error })
-                            :
-                            response.status(201).json({
+                            ? response.status(500).json({ "error": error })
+                            : response.status(201).json({
                                 "Familia creada correctamente!":
                                     results.affectedRows
                             });
