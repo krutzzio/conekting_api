@@ -11,9 +11,9 @@ const postFamilias = (request, response) => {
 
     connection.query(call1, [nombreFamilia, descripcionFamilia],
         (error, results) => {
+            console.log(results)
 
             const idfamilia = results.insertId
-
             error
                 ? response.status(500).json({ "error": error })
                 : connection.query(call2, [idusuario, idfamilia, 1],

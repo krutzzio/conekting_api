@@ -6,9 +6,11 @@ VALUES (?,?,?,?,?,?,?)`
 const call2 = `INSERT INTO eventosusuarios (idevento,idusuario,organizadorEvento) 
 VALUES (?,?,?)`
 
-const postEvento = (request, response) => {
-    const { nombreEvento, descripcionEvento, fechaEvento, calleEvento, numerocalleEvento, cpEvento, idfamilia, idusuario } = request.body;
+const call3 = `INSERT INTO intereseseventos (idevento,idinteres) 
+VALUES (?,?)`
 
+const postEvento = (request, response) => {
+    const { nombreEvento, descripcionEvento, fechaEvento, calleEvento, numerocalleEvento, cpEvento, idfamilia, idusuario, idintereses } = request.body;
     connection.query(call1, [nombreEvento, descripcionEvento, fechaEvento, calleEvento, numerocalleEvento, cpEvento, idfamilia],
         (error, results) => {
             const idevento = results.insertId
@@ -18,9 +20,18 @@ const postEvento = (request, response) => {
                 :
                 connection.query(call2, [idevento, idusuario, 1],
                     (error, results) => {
-                        error
-                            ? response.status(500).json({ "error": error })
-                            : response.status(201).json({ "Evento Creado!": results.affectedRows })
+                        if (error) {
+                            response.status(500).json({ "error": error })
+                        } else {
+                            idintereses.forEach(idinteres => connection.query(call3, [idevento, idinteres],
+                                (error, results) => {
+                                    error &&
+                                        response.status(500).json({ "error": error })
+
+                                }
+                            ))
+                            response.status(201).json({ idevento });
+                        }
                     }
                 )
         }

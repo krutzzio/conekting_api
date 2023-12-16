@@ -1,6 +1,3 @@
-
-
-
 const { connection } = require("../../config.db");
 
 const call = `SELECT intereses.idinteres, intereses.nombreInteres FROM usuarios
