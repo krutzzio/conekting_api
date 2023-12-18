@@ -1,14 +1,15 @@
 const { connection } = require("../../config.db");
 
-const call = `SELECT * FROM familias
-        INNER JOIN eventos ON familias.idfamilia = eventos.idfamilia
-        INNER JOIN eventosusuarios ON eventos.idevento = eventosusuarios.idevento
-        INNER JOIN usuarios ON eventosusuarios.idusuario = usuarios.idusuario
-        WHERE eventosusuarios.organizadorEvento = 1
-        ORDER BY eventos.fechaEvento;`
+const call = `SELECT e.*
+    FROM eventos e
+    LEFT JOIN eventosusuarios eu ON e.idevento = eu.idevento AND eu.idusuario = ?
+    WHERE eu.idevento IS NULL;`
         
 const getEventos = (request, response) => {
-    connection.query(call, (error, results) => {
+
+    const id = request.headers.idusuario
+
+    connection.query(call,[id], (error, results) => {
         error
             ? response.status(500).json({ "error": error })
             : response.status(200).json(results);
