@@ -3,7 +3,7 @@ const { connection } = require("../../config.db");
 const call = `SELECT intereses.idinteres, intereses.nombreInteres FROM usuarios
         INNER JOIN interesesusuarios ON usuarios.idusuario = interesesusuarios.idusuario
         INNER JOIN intereses ON interesesusuarios.idinteres = intereses.idinteres
-        WHERE usuarios.idusuario = ?;`
+        WHERE usuarios.idusuario = ?`
 
 const getInteresesUsuario = (request, response) => {
 
